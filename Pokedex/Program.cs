@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using System.Text.Json;
 using RestSharp;
 using System;
 
@@ -9,56 +10,35 @@ namespace Pokedex
     {
         static void Main(string[] args)
         {
-            InvocarGet();
+            PokemonGet();
         }
 
-        static void InvocarGet()
+        public static void PokemonGet()
         {
-            //Console.Write("DIgite abeiro o nome do pokemon que deseja ver: ");
-            //var nome = Console.ReadLine();
+            Console.Write("Entre com o Nome do Pokemon: ");
+            var especie = Console.ReadLine();
 
-            var url = $"https://pokeapi.co/api/v2/pokemon/";
+            var url = new RestClient($"https://pokeapi.co/api/v2/pokemon/{especie.ToLower()}");
+            var request = new RestRequest("", Method.Get);
+            var response = url.Execute(request);
 
-            HttpClient client = new HttpClient();
-            var response = client.GetAsync(url).Result;
-            if (response.IsSuccessStatusCode)
+            
+              var listPokemon =   JsonSerializer.Deserialize<Pokemon>(response.Content);
+
+            Console.WriteLine($"Nome Pokemon: {listPokemon.name}");
+            Console.WriteLine($"Altura: {listPokemon.height}");
+            Console.WriteLine($"Peso: {listPokemon.weight}");
+            Console.WriteLine("Habilidades: ");
+            foreach (var pok in listPokemon.abilities)
             {
-                var results = response.Content.ReadAsStringAsync().Result;
-
-                var listPokemon = JsonConvert.DeserializeObject<Pokemon>(results);
-
-                foreach (var pok in listPokemon.Results)
-                {
-                    Console.WriteLine(pok.Name);
-                }
+                Console.WriteLine(pok.ability.name.ToUpper() + " ");
             }
+            Console.WriteLine();
+
             Console.ReadKey();
         }
     }
-
-    
-
-    public class Pokemon
-    {
-        [JsonProperty("count")]
-        public long Count { get; set; }
-
-        [JsonProperty("next")]
-        public Uri Next { get; set; }
-
-        [JsonProperty("previous")]
-        public object Previous { get; set; }
-
-        [JsonProperty("results")]
-        public Result[] Results { get; set; }
-    }
-    public partial class Result
-    {
-        [JsonProperty("name")]
-        public string Name { get; set; }
-
-        [JsonProperty("url")]
-        public Uri Url { get; set; }
-    }
 }
+
+
 
