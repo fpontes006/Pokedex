@@ -1,4 +1,4 @@
-﻿namespace Pokedex
+﻿namespace Pokedex.Model
 {
     public class Abilities
     {
