@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace Pokedex.View
 {
@@ -14,6 +15,7 @@ namespace Pokedex.View
         public PokemonView()
         {
             BoaVindas();
+            Console.WriteLine(@"Ⓟⓞⓚⓔⓜⓞⓝ");
         }
 
         public void BoaVindas()
@@ -51,17 +53,34 @@ namespace Pokedex.View
 
             return Console.ReadLine().ToUpper();
         }
-        public void DetalheMascote(Mascote mascote)
+
+        public void DetalhesMascote(Pokemon pokemon)
         {
             Console.WriteLine("\n______________________________________________________________________");
-            Console.WriteLine($"Nome Mascote: {mascote.Nome.ToUpper()}");
-            Console.WriteLine($"Altura Mascote: {mascote.Altura}");
-            Console.WriteLine($"Peso Mascote: {mascote.Peso}");
+            Console.WriteLine($"Nome Pokemon: {pokemon.name.ToUpper()}");
+            Console.WriteLine($"Altura: {pokemon.height}");
+            Console.WriteLine($"Peso: {pokemon.weight}");
 
             Console.WriteLine("Habilidades: ");
-            foreach (var hab in mascote.Habilidades)
+            foreach (var hab in pokemon.abilities)
             {
-                Console.Write(hab.ability.name.ToUpper() + " ");
+                Console.Write(hab.ability!.name!.ToUpper() + " ");
+            }
+        }
+        public void DetalhesMascoteAdotado(Pokemon pokemon)
+        {
+            Console.WriteLine("\n______________________________________________________________________");
+            Console.WriteLine($"Nome Mascote: {pokemon.name.ToUpper()}");
+            Console.WriteLine($"Altura Mascote: {pokemon.height}");
+            Console.WriteLine($"Peso Mascote: {pokemon.weight}");
+
+            TimeSpan idade = DateTime.Now.Subtract(pokemon.DataNascimento);
+
+            Console.WriteLine($"Idade: {idade.Minutes} Anos em Pokemon Virtual");
+
+            if (true)
+            {
+
             }
         }
         public void SucessoAdocao(string especie)
@@ -75,6 +94,59 @@ namespace Pokedex.View
             ████████║
             ╚█████╔╝
              ╚════╝");
+        }
+
+        public int MenuConsultarMascotes(List<Pokemon> pokemons)
+        {
+            Console.WriteLine("\n__________________________________________________________________________");
+            Console.WriteLine($"Voce Possui {pokemons.Count} Pokemon Adotados.");
+            for (int indicePokemon = 0; indicePokemon < pokemons.Count; indicePokemon++)
+            {
+                Console.WriteLine($"{indicePokemon} - {pokemons[indicePokemon].name.ToUpper()}");
+            }
+
+            Console.WriteLine($"Qual Pokemon você deseja interagir? ");
+            return Convert.ToInt32( Console.ReadLine() );
+        }
+
+        public string InteragirComMascotes(Pokemon pokemon)
+        {
+            Console.WriteLine("\n___________________________________________________________________________");
+            Console.WriteLine($"{NomeJogador} VOCE DESEJA:");
+            Console.WriteLine($"1 - SABER COMO O {pokemon.name.ToUpper()}");
+            Console.WriteLine($"2 - ALIMENTAR O  {pokemon.name.ToUpper()}");
+            Console.WriteLine($"3 - BRINCAR COM O {pokemon.name.ToUpper()}");
+            Console.WriteLine($"4 - VOLTAR");
+
+            return Console.ReadLine().ToUpper();
+        }
+
+        public void AlimentarMascoste()
+        {
+            Console.WriteLine("\n_____________________________________________________________________________");
+            Console.WriteLine($"(=^w^=)");
+            Console.WriteLine($"Pokemon Alimentado");
+        }
+
+        public void BrincarMascote()
+        {
+            Console.WriteLine("\n_______________________________________________________________________________");
+            Console.WriteLine($"(=^w^=)");
+            Console.WriteLine($"Pokemon esta feliz");
+        }
+        public void GameOver(Pokemon pokemon)
+        {
+            Console.WriteLine("\n_________________________________________________________________________________");
+            Console.WriteLine("O Mascote Morreu de " + (pokemon.Humor > 0 ? "fome" : "Tristeza"));
+
+            Console.WriteLine(@"
+              #####      #     #     #  #######      #######  #     #  #######  ######  
+             #     #    # #    ##   ##  #            #     #  #     #  #        #     # 
+             #         #   #   # # # #  #            #     #  #     #  #        #     # 
+             #  ####  #     #  #  #  #  #####        #     #  #     #  #####    ######  
+             #     #  #######  #     #  #            #     #   #   #   #        #   #   
+             #     #  #     #  #     #  #            #     #    # #    #        #    #  
+              #####   #     #  #     #  #######      #######     #     #######  #     # ");
         }
     }
 }
