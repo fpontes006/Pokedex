@@ -1,4 +1,5 @@
-﻿using Pokedex.Model;
+﻿using AutoMapper;
+using Pokedex.Model;
 using Pokedex.Service;
 using Pokedex.View;
 using System;
@@ -12,14 +13,14 @@ namespace Pokedex.Controller
     public class PokemonController
     {
         private string NomeJogador { get; set; }
-        private List<Pokemon> MascoteAdotados { get; set; }
+        private List<Mascote> MascoteAdotados { get; set; }
         private PokemonView Mensagens { get; set; }
 
-        // private MascoteMapping Mapeador;
+        private MascoteMapping Mapeador;
 
         public PokemonController()
         {
-            this.MascoteAdotados = new List<Pokemon>();
+            this.MascoteAdotados = new List<Mascote>();
             this.Mensagens = new PokemonView();
         }
         public void Jogar()
@@ -48,6 +49,7 @@ namespace Pokedex.Controller
         {
             string opcaoUsuario = "1", especieMascote;
             Pokemon pokemon = new();
+            Mascote mascote = new();
 
             especieMascote = Mensagens.MenuAdocao();
 
@@ -59,12 +61,29 @@ namespace Pokedex.Controller
                 {
                     case "1":
                         pokemon = PokemonService.GetPokemon(especieMascote);
-                        Mensagens.DetalhesMascote(pokemon); break;
+
+                        Mapper.CreateMap<Pokemon, Mascote>()
+                            .ForMember(dest => dest.Altura, opt => opt.MapFrom(src => src.height))
+                            .ForMember(dest => dest.Peso, opt => opt.MapFrom(src => src.weight))
+                            .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.name))
+                            .ForMember(dest => dest.Habilidades, opt => opt.MapFrom(src => src.abilities));
+                        mascote = Mapper.Map<Pokemon, Mascote>(pokemon);
+                        Mensagens.DetalhesMascote(pokemon);
+                        break;
 
 
                     case "2":
                         pokemon = PokemonService.GetPokemon(especieMascote);
-                        this.MascoteAdotados.Add(pokemon);
+
+                        Mapper.CreateMap<Pokemon, Mascote>()
+                            .ForMember(dest => dest.Altura, opt => opt.MapFrom(src => src.height))
+                            .ForMember(dest => dest.Peso, opt => opt.MapFrom(src => src.weight))
+                            .ForMember(dest => dest.Nome, opt => opt.MapFrom(src => src.name))
+                            .ForMember(dest => dest.Habilidades, opt => opt.MapFrom(src => src.abilities));
+
+                        mascote = Mapper.Map<Pokemon, Mascote>(pokemon);
+
+                        this.MascoteAdotados.Add(mascote);
                         Mensagens.SucessoAdocao(NomeJogador);
                         return;
                     case "3":

@@ -67,14 +67,14 @@ namespace Pokedex.View
                 Console.Write(hab.ability!.name!.ToUpper() + " ");
             }
         }
-        public void DetalhesMascoteAdotado(Pokemon pokemon)
+        public void DetalhesMascoteAdotado(Mascote mascote)
         {
             Console.WriteLine("\n______________________________________________________________________");
-            Console.WriteLine($"Nome Mascote: {pokemon.name.ToUpper()}");
-            Console.WriteLine($"Altura Mascote: {pokemon.height}");
-            Console.WriteLine($"Peso Mascote: {pokemon.weight}");
+            Console.WriteLine($"Nome Mascote: {mascote.Nome.ToUpper()}");
+            Console.WriteLine($"Altura Mascote: {mascote.Altura}");
+            Console.WriteLine($"Peso Mascote: {mascote.Peso}");
 
-            TimeSpan idade = DateTime.Now.Subtract(pokemon.DataNascimento);
+            TimeSpan idade = DateTime.Now.Subtract(mascote.DataNascimento);
 
             Console.WriteLine($"Idade: {idade.Minutes} Anos em Pokemon Virtual");
 
@@ -96,26 +96,26 @@ namespace Pokedex.View
              ╚════╝");
         }
 
-        public int MenuConsultarMascotes(List<Pokemon> pokemons)
+        public int MenuConsultarMascotes(List<Mascote> mascotes)
         {
             Console.WriteLine("\n__________________________________________________________________________");
-            Console.WriteLine($"Voce Possui {pokemons.Count} Pokemon Adotados.");
-            for (int indicePokemon = 0; indicePokemon < pokemons.Count; indicePokemon++)
+            Console.WriteLine($"Voce Possui {mascotes.Count} Pokemon Adotados.");
+            for (int indicePokemon = 0; indicePokemon < mascotes.Count; indicePokemon++)
             {
-                Console.WriteLine($"{indicePokemon} - {pokemons[indicePokemon].name.ToUpper()}");
+                Console.WriteLine($"{indicePokemon} - {mascotes[indicePokemon].Nome.ToUpper()}");
             }
 
             Console.WriteLine($"Qual Pokemon você deseja interagir? ");
             return Convert.ToInt32( Console.ReadLine() );
         }
 
-        public string InteragirComMascotes(Pokemon pokemon)
+        public string InteragirComMascotes(Mascote mascote)
         {
             Console.WriteLine("\n___________________________________________________________________________");
             Console.WriteLine($"{NomeJogador} VOCE DESEJA:");
-            Console.WriteLine($"1 - SABER COMO O {pokemon.name.ToUpper()}");
-            Console.WriteLine($"2 - ALIMENTAR O  {pokemon.name.ToUpper()}");
-            Console.WriteLine($"3 - BRINCAR COM O {pokemon.name.ToUpper()}");
+            Console.WriteLine($"1 - SABER COMO O {mascote.Nome.ToUpper()}");
+            Console.WriteLine($"2 - ALIMENTAR O  {mascote.Nome.ToUpper()}");
+            Console.WriteLine($"3 - BRINCAR COM O {mascote.Nome.ToUpper()}");
             Console.WriteLine($"4 - VOLTAR");
 
             return Console.ReadLine().ToUpper();
@@ -134,10 +134,10 @@ namespace Pokedex.View
             Console.WriteLine($"(=^w^=)");
             Console.WriteLine($"Pokemon esta feliz");
         }
-        public void GameOver(Pokemon pokemon)
+        public void GameOver(Mascote mascote)
         {
             Console.WriteLine("\n_________________________________________________________________________________");
-            Console.WriteLine("O Mascote Morreu de " + (pokemon.Humor > 0 ? "fome" : "Tristeza"));
+            Console.WriteLine("O Mascote Morreu de " + (mascote.Humor > 0 ? "fome" : "Tristeza"));
 
             Console.WriteLine(@"
               #####      #     #     #  #######      #######  #     #  #######  ######  
