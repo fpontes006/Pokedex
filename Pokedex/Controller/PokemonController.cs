@@ -2,11 +2,6 @@
 using Pokedex.Model;
 using Pokedex.Service;
 using Pokedex.View;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Pokedex.Controller
 {
@@ -23,6 +18,7 @@ namespace Pokedex.Controller
             this.MascoteAdotados = new List<Mascote>();
             this.Mensagens = new PokemonView();
         }
+
         public void Jogar()
         {
             string opcaoUsuario;
@@ -71,7 +67,6 @@ namespace Pokedex.Controller
                         Mensagens.DetalhesMascote(pokemon);
                         break;
 
-
                     case "2":
                         pokemon = PokemonService.GetPokemon(especieMascote);
 
@@ -86,14 +81,17 @@ namespace Pokedex.Controller
                         this.MascoteAdotados.Add(mascote);
                         Mensagens.SucessoAdocao(NomeJogador);
                         return;
+
                     case "3":
                         return;
+
                     default:
                         Console.WriteLine("Opcao Invalida! Tente Novamente: ");
                         break;
                 }
             }
         }
+
         public void MenuInteracao()
         {
             string opcaoUsuario = "0";
@@ -109,12 +107,14 @@ namespace Pokedex.Controller
                     case "1":
                         Mensagens.DetalhesMascoteAdotado(MascoteAdotados[indiceMascote]);
                         break;
+
                     case "2":
                         MascoteAdotados[indiceMascote].AlimentarMascote();
                         Mensagens.AlimentarMascoste();
                         if (!MascoteAdotados[indiceMascote].SaudeMascote())
                             Mensagens.GameOver(MascoteAdotados[indiceMascote]);
                         break;
+
                     case "3":
                         MascoteAdotados[indiceMascote].BrincarMascote();
                         if (!MascoteAdotados[indiceMascote].SaudeMascote())
@@ -122,18 +122,12 @@ namespace Pokedex.Controller
                             Mensagens.GameOver(MascoteAdotados[indiceMascote]);
                         }
                         break;
+
                     default:
                         Console.WriteLine("Opcção Invalida");
                         break;
                 }
-
-
-
-
-
             }
-
         }
-
     }
 }

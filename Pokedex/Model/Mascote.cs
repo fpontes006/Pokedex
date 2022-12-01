@@ -1,8 +1,4 @@
-﻿using Pokedex.Model;
-using System;
-using System.Collections.Generic;
-
-namespace Pokedex.Model
+﻿namespace Pokedex.Model
 {
     public class Mascote
     {
@@ -14,7 +10,7 @@ namespace Pokedex.Model
         public int Humor { get; set; }
         public DateTime DataNascimento { get; set; }
 
-        public Mascote() 
+        public Mascote()
         {
             Random valorRandomico = new();
             Alimentacao = valorRandomico.Next(2, 10);
@@ -26,13 +22,14 @@ namespace Pokedex.Model
         /// Verifica se o mascote tem fome
         /// </summary>
         /// <returns>True = Sim False = Não</returns>
-        public bool VerificarFome() 
+        public bool VerificarFome()
         {
-            return this.Alimentacao < 5; 
+            return this.Alimentacao < 5;
         }
-        public void AlimentarMascote() 
+
+        public void AlimentarMascote()
         {
-            this.Alimentacao++;           
+            this.Alimentacao++;
         }
 
         public void BrincarMascote()
@@ -41,10 +38,9 @@ namespace Pokedex.Model
             this.Alimentacao--;
         }
 
-        public bool SaudeMascote() 
+        public bool SaudeMascote()
         {
-            return (this.Alimentacao > 0 && this.Humor > 0);            
+            return (this.Alimentacao > 0 && this.Humor > 0);
         }
-       
     }
 }

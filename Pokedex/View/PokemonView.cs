@@ -1,10 +1,4 @@
 ﻿using Pokedex.Model;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
 
 namespace Pokedex.View
 {
@@ -21,7 +15,7 @@ namespace Pokedex.View
         public void BoaVindas()
         {
             Console.WriteLine("\n\nQual o Seu Nome? ");
-            NomeJogador =  Console.ReadLine().ToUpper();
+            NomeJogador = Console.ReadLine().ToUpper();
         }
 
         public void MenuInicial()
@@ -67,6 +61,7 @@ namespace Pokedex.View
                 Console.Write(hab.ability!.name!.ToUpper() + " ");
             }
         }
+
         public void DetalhesMascoteAdotado(Mascote mascote)
         {
             Console.WriteLine("\n______________________________________________________________________");
@@ -80,9 +75,9 @@ namespace Pokedex.View
 
             if (true)
             {
-
             }
         }
+
         public void SucessoAdocao(string especie)
         {
             Console.WriteLine($"{NomeJogador} MASCOTE ADOTADO COM SUCESSO,O OVO ESTÉ CHOCANDO");
@@ -106,7 +101,7 @@ namespace Pokedex.View
             }
 
             Console.WriteLine($"Qual Pokemon você deseja interagir? ");
-            return Convert.ToInt32( Console.ReadLine() );
+            return Convert.ToInt32(Console.ReadLine());
         }
 
         public string InteragirComMascotes(Mascote mascote)
@@ -134,18 +129,19 @@ namespace Pokedex.View
             Console.WriteLine($"(=^w^=)");
             Console.WriteLine($"Pokemon esta feliz");
         }
+
         public void GameOver(Mascote mascote)
         {
             Console.WriteLine("\n_________________________________________________________________________________");
             Console.WriteLine("O Mascote Morreu de " + (mascote.Humor > 0 ? "fome" : "Tristeza"));
 
             Console.WriteLine(@"
-              #####      #     #     #  #######      #######  #     #  #######  ######  
-             #     #    # #    ##   ##  #            #     #  #     #  #        #     # 
-             #         #   #   # # # #  #            #     #  #     #  #        #     # 
-             #  ####  #     #  #  #  #  #####        #     #  #     #  #####    ######  
-             #     #  #######  #     #  #            #     #   #   #   #        #   #   
-             #     #  #     #  #     #  #            #     #    # #    #        #    #  
+              #####      #     #     #  #######      #######  #     #  #######  ######
+             #     #    # #    ##   ##  #            #     #  #     #  #        #     #
+             #         #   #   # # # #  #            #     #  #     #  #        #     #
+             #  ####  #     #  #  #  #  #####        #     #  #     #  #####    ######
+             #     #  #######  #     #  #            #     #   #   #   #        #   #
+             #     #  #     #  #     #  #            #     #    # #    #        #    #
               #####   #     #  #     #  #######      #######     #     #######  #     # ");
         }
     }

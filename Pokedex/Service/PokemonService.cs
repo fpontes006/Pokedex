@@ -1,11 +1,6 @@
 ﻿using Pokedex.Model;
 using RestSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Pokedex.Service
 {
@@ -18,7 +13,6 @@ namespace Pokedex.Service
             var response = url.Execute(request);
 
             return JsonSerializer.Deserialize<Pokemon>(response.Content);
-
         }
     }
 }
